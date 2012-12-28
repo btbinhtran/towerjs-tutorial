@@ -15,7 +15,7 @@ Tower.js is heavily influenced by Rails and adds it's own niceties.
 
 Imagine finally writing web app code that is shorter because it bridges the client and the server.
 
-Tower.js started in 2012.
+Tower.js was started by Lance Pollard ([@viatropos](http://twitter.com/viatropos)) in 2012.
 
 ### Comments for various readers
 
@@ -234,6 +234,7 @@ $ nvm help
 ````
 
 #### Install Tower.js
+
 Once you've installed Node.js, installing Tower.js should be easy through NPM. This tutorial works on Tower 0.4.2-22, which we can install as follows:
 
 ````shell
@@ -254,6 +255,7 @@ $ tower -V
 ````
 
 ### The first application
+
 Almost all Tower.js applications start the same way, with the **tower** command. This nifty program creates a skeleton Tower.js application in a directory of your choice. To get started, make a directory for your Tower.js projects and then run the **tower** command to make the first application.
 
 ````shell
