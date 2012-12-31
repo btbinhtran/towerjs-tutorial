@@ -31,7 +31,7 @@ The Tower.js Tutorial contains integrated tutorials for Tower.js and the CoffeeS
 
 **Experienced JavaScript and/or CoffeeScript programmers:** You'll blast through this book.
 
-**Inexperienced Tower.js programmers:**May you read some other tutorials and built some small Tower.js apps. You can still get a lot out of this book. Most important, the techniques here may be more up-to-date than when you originally learned Tower.js.
+**Inexperienced Tower.js programmers:** Maybe you read some other tutorials and built some small Tower.js apps. You can still get a lot out of this book. Most important, the techniques here may be more up-to-date than when you originally learned Tower.js.
 
 **Experienced Tower.js programmers:** This book is unnecessary for you, but you might be surprised at what you can still learn.
 
@@ -128,7 +128,7 @@ Instead of using an IDE, I prefer using a text editor to edit text and a command
 * **Text editor:** I recommend Sublime Text 2, an outstanding cross-platform text editor. Sublime Text is heavily influenced by TextMate, and in fact is compatible with most TextMate customizations, such as snippets and color schemes. TextMate, which is available only on OS X, is still a good choice if you use a Mac.) A second excellent choice is Vim, versions of which are available for all major platforms. Sublime Text can be obtained commercially, whereas Vim can be obtained at no cost. Sublime Text is much more accessible to beginners.
 * **Terminal:** On OS X, I recommend using the native Terminal app or iTerm. On Linux, the default terminal is fine. On Windows, you can develop Tower.js applications in a virtual machine running Linux.
 
-If you decide to use Sublime Text, you want to follow the setup instructions for Tower.js Tutorial Sublime Text. *Note:* Such configuration settings are fiddly and error-prone, so this step should only be attempted by advanced users.
+If you decide to use Sublime Text, you want to follow the setup instructions for [CoffeeScript Sublime Plugin](https://github.com/Xavura/CoffeeScript-Sublime-Plugin). *Note:* Such configuration settings are fiddly and error-prone, so this step should only be attempted by advanced users.
 
 #### Browsers
 
@@ -245,6 +245,12 @@ We also need to install CoffeeScript version 1.4.0 like so:
 
 ````shell
 $ npm install -g coffee-script@1.4.0
+````
+
+and install Grunt version 0.3.17:
+
+````shell
+npm install -g grunt@0.3.17
 ````
 
 To check your Tower.js installation, run the following command to print out the version number:
@@ -484,7 +490,255 @@ Right now, just focus on the depencies within **package.json** which are:
 }
 ````
 
+These lines state what Node.js packages are used for your Tower.js application.
+
+The lines
+
+````javascript
+{
+
+...
+  
+  "dependencies": {
+    "async": ">= 0.1.22",
+    "coffee-script": "1.3.3",
+    "mongodb": ">= 1.1.10",
+    "coffeecup": ">= 0.3.17",
+    "socket.io": ">= 0.8.7",
+    "socket.io-client": ">= 0.9.5",
+    "tower": ">= 0.4.2",
+    "which": ">= 1.0.5"
+  },
+
+  ...
+
+}
+````
+
+state the Node.js packages that are at the core of your Tower.js application. Your app is "dependent" on those packages.
+
+The lines
+
+````javascript
+{
+
+...
+
+  "optionalDependencies": {
+    "nodemailer": ">= 0.3.28",
+    "kue": ">= 0.3.4"
+  },
+
+...
+
+}
+````
+
+are what you probably guessed, "optional" Node.js packages for your application.
+
+The lines
+
+````javascript
+{
+
+...
+
+  "devDependencies": {
+    "chokidar": "~0.4.0",
+    "stylus": ">= 0.29.0",
+    "Faker": ">= 0.1.3",
+    "less": ">= 1.2.2",
+    "uglify-js": ">= 1.1.1",
+    "mocha": ">= 0.12.1",
+    "chai": ">= 0.3.3",
+    "sinon": ">= 1.3.1",
+    "knox": ">= 0.0.11",
+    "gzip": ">= 0.1.0",
+    "cli-table": ">= 0.0.1",
+    "grunt-contrib-less": ">= 0.3.0",
+    "grunt-contrib-stylus": ">= 0.3.0",
+    "grunt-contrib": ">= 0.2.0",
+    "superagent": ">= 0.9.5",
+    "wrench": ">= 1.3.8",
+    "fibers": "~0.6.8",
+    "ejs": ">= 0.6.1"
+  },
+
+...
+
+}
+````
+
+are Node.js packages that are needed when you are **dev**eloping your application.
+
 We'll discuss what the other lines in **package.json** are later.
+
+#### TODO Node.js package version numbers
+
+### Node.js package version numbers
+
+
+
+Right now, we need to change the **package.json** to use the specific major and minor version numbers of Node.js packages.
+
+If you don't specify a version number on the package, NPM will install the latest version of the package. Unfortunately, package updates cause minor but potentially confusing breakage in minor and major updates. That is why you apply a range on a specific version number.
+
+Change **firstApp/package.json** with latest package version ranges, node and npm versions:
+
+````javascript
+{
+  "name": "firstApp",
+  "private": true,
+  "version": "0.1.0",
+  "description": "",
+  "homepage": "http://User.github.com/firstApp",
+  "main": "./server.js",
+  "subdomain": "firstApp",
+  "author": "'Binh Tran' <btbinhtran@gmail.com>",
+  "keywords": [
+    "node"
+  ],
+  "maintainers": [{
+    "name": "Binh Tran",
+    "email": "btbinhtran@gmail.com"
+  }],
+  "contributors": [
+
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://mths.be/mit"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/User/firstApp/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/User/firstApp.git"
+  },
+  "engines": {
+    "node": "~0.8.16",
+    "npm": "~1.1.69"
+  },
+  "dependencies": {
+    "async": "~0.1.22",
+    "coffee-script": "~1.4.0",
+    "mongodb": "~1.2.6",
+    "coffeecup": "~0.3.18",
+    "socket.io": "~0.9.13",
+    "socket.io-client": "~0.9.11",
+    "tower": "~0.4.2",
+    "which": "~1.0.5"
+  },
+  "optionalDependencies": {
+    "nodemailer": "~0.3.37",
+    "kue": "~0.5.0"
+  },
+  "devDependencies": {
+    "chokidar": "~0.5.0",
+    "stylus": "~0.31.0",
+    "Faker": "~0.1.3",
+    "less": "~1.3.3",
+    "uglify-js": "~2.2.2",
+    "mocha": "~1.7.4",
+    "chai": "~1.4.2",
+    "sinon": "~1.5.2",
+    "knox": "~0.4.6",
+    "gzip": "~0.1.0",
+    "cli-table": "~0.2.0",
+    "grunt-contrib-less": "~0.3.2",
+    "grunt-contrib-stylus": "~0.3.1",
+    "grunt-contrib": "~0.3.0",
+    "superagent": "~0.10.0",
+    "wrench": "~1.4.4",
+    "fibers": "~0.6.8",
+    "ejs": "~0.8.3"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha $(find test -name \"*Test.coffee\")",
+    "prepublish": "npm prune; rm -rf node_modules/*/{test,example,bench}*",
+    "start": "node server.js -e production"
+  },
+  "tower": {
+    "stylesheets": "styl",
+    "scripts": "coffee",
+    "templates": "coffee"
+  }
+}
+````
+
+The syntax
+
+````javascript
+"tower": ">= 0.4.2"
+````
+
+installs the latest version of the tower package as long as it's greater than version 0.4.2 even if it's **3.3**. Meanwhile, the code
+
+````javascript
+"socket.io": "~0.9.13"
+````
+
+installs the package **coffee-script** as long as it's lower than version **0.10**. In other words, the >= notation always does upgrades, whereas the ~0.9.13 notation only performs upgrades to patch releases (e.g. from **0.9.13** to **0.9.14**), but not to minor releases (e.g. from **0.9** to **0.10**). Unfortunately, package updates cause minor but potentially confusing breakage in minor and major updates. That is why we will apply a range on a package version numbers, which is good practice.
+
+Once you've created the proper **package.json** file, install the packages using **npm install**
+
+````shell
+$ npm install
+npm http GET https://registry.npmjs.org/async
+...
+````
+
+The **npm install** command might take some time, but when it's done our application will be ready to run.
+
+### tower server
+
+Thanks to running **tower new** and **npm install**, we already have an application we can run. It's because Tower.js comes with a command-line program, or script, that runs a local web server, visible only from your development machine.
+
+First run
+
+````shell
+$ cake watch
+Default database not set, using Memory store
+Running "copy:stylesheets" (copy) task
+Copied 2 files.
+
+Running "copy:javascripts" (copy) task
+Copied 35 files.
+
+Running "copy:images" (copy) task
+Copied 0 files.
+
+Running "coffee:compile" (coffee) task
+
+Running "less:bootstrap" (less) task
+File public/stylesheets/vendor/stylesheets/bootstrap/bootstrap.css created.
+
+Running "stylus:compile" (stylus) task
+File public/stylesheets/app/stylesheets/client/application.css created.
+
+Running "templates:compile" (templates) task
+
+Running "watch" task
+Waiting...
+````
+
+to compile your CoffeeScript files and watch for any file text changes. If you edit any of your CoffeeScript files, they will automatically recompiled.
+
+Then run the development server:
+
+````shell
+$ tower server
+firstApp: tower server
+   info  - socket.io started
+Tower development server listening on port 3000
+````
+
+This tells us that the application is running on port number 3000. The application is running on port number 3000 at the address 0.0.0.0. This address tells the computer to listen on every available IP address configured on that specific machine. In particular, we can view the application using the special address **127.0.0.1**, which is also known as **localhost**. We can see the result of visiting http://localhost:3000/
+
+![firstApp running](images/firstAppRunning.png)
 
 \clearpage
 
